@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AWS Nova Sonic Voice Agent</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <nav class="tabs" aria-label="Mode tabs">
+        <button id="tabNova" class="tab-btn is-active" type="button">Nova Sonic</button>
+        <button id="tabModular" class="tab-btn" type="button">Modular Stack Experiment</button>
+        <a class="tab-btn nav-link" href="/flow.html">Flow Page</a>
+      </nav>
+
+      <h1>Educate yourself with AI</h1>
+      <h2 class="subhead">Nova Sonic voice Agen</h2>
+      <p class="subtitle">Talk in real time from your browser.</p>
+      <section class="pipeline-strip">
+        <span class="pipeline-chip" id="pipelineProfile">Pipeline: Nova Sonic</span>
+        <span class="pipeline-chip" id="pipelineModel">Model: amazon.nova-2-sonic-v1:0</span>
+        <span class="pipeline-chip" id="pipelineTts">TTS: nova-sonic-integrated</span>
+      </section>
+
+      <section class="avatar-panel" id="avatarPanel" data-mode="idle">
+        <div class="avatar-shell">
+          <div class="avatar-ring ring-1"></div>
+          <div class="avatar-ring ring-2"></div>
+          <div class="avatar-core"></div>
+          <div class="equalizer" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="avatar-meta">
+          <p class="avatar-title">Voice State</p>
+          <p class="avatar-mode" id="avatarMode">Idle</p>
+        </div>
+      </section>
+
+      <section id="experimentPanel" class="panel hidden">
+        <h2>4. True Heavy User Monthly Cost</h2>
+        <p class="subtitle">Comparison profile based on your uploaded stack.</p>
+        <table class="cost-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Heavy Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>LLM reasoning</td><td>$3.50 - $4.50</td></tr>
+            <tr><td>Polly TTS</td><td>$1.80 - $2.50</td></tr>
+            <tr><td>DynamoDB</td><td>$0.05 - $0.15</td></tr>
+            <tr><td>S3 storage + cached audio</td><td>$0.05 - $0.20</td></tr>
+            <tr><td>S3 vector queries</td><td>$0.05 - $0.15</td></tr>
+            <tr><td>Valkey cache share</td><td>$0.05 - $0.10</td></tr>
+            <tr><td>Lambda / API Gateway</td><td>$0.10 - $0.25</td></tr>
+            <tr><td>CloudWatch + telemetry</td><td>$0.05 - $0.15</td></tr>
+            <tr><td>Data transfer</td><td>$0.02 - $0.10</td></tr>
+          </tbody>
+        </table>
+        <p class="total-cost">Heavy user total: <strong>$5.70 - $8.10</strong></p>
+      </section>
+
+      <label for="systemPrompt">System prompt</label>
+      <textarea id="systemPrompt" rows="3">You are a concise, helpful voice assistant.</textarea>
+
+      <div class="controls">
+        <button id="voiceToggleBtn" type="button">Voice: Male</button>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+      </div>
+
+      <section class="panel">
+        <h2>Status</h2>
+        <pre id="status">Idle</pre>
+      </section>
+
+      <section class="panel">
+        <h2>One-on-One Performance</h2>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Profile</th>
+              <th>Turns</th>
+              <th>Avg first response</th>
+              <th>Avg interrupt reaction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nova Sonic</td>
+              <td id="mNovaTurns">0</td>
+              <td id="mNovaFRT">-</td>
+              <td id="mNovaINT">-</td>
+            </tr>
+            <tr>
+              <td>Modular Stack</td>
+              <td id="mModTurns">0</td>
+              <td id="mModFRT">-</td>
+              <td id="mModINT">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h2>Transcript</h2>
+        <pre id="transcript"></pre>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

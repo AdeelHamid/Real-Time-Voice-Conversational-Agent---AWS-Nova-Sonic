@@ -1,0 +1,62 @@
+.flow-app {
+  max-width: 980px;
+}
+
+.flow-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.flow-list {
+  margin: 10px 0 0;
+  padding-left: 22px;
+  line-height: 1.7;
+}
+
+.flow-list li {
+  margin-bottom: 10px;
+}
+
+.flow-note {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(32, 211, 238, 0.1);
+  border: 1px solid rgba(32, 211, 238, 0.25);
+}
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.flow-card {
+  border: 1px solid rgba(116, 158, 214, 0.26);
+  border-radius: 12px;
+  background: rgba(14, 29, 53, 0.65);
+  padding: 12px;
+}
+
+.flow-card h3 {
+  margin: 0 0 8px;
+}
+
+.flow-card ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+@media (max-width: 760px) {
+  .flow-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .flow-grid {
+    grid-template-columns: 1fr;
+  }
+}

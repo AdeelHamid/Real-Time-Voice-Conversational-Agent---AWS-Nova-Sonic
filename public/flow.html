@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voice Flow Documentation</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/flow.css" />
+  </head>
+  <body>
+    <main class="app flow-app">
+      <div class="flow-top">
+        <h1>How The Voice Flows Work</h1>
+        <a class="tab-btn nav-link" href="/">Back to App</a>
+      </div>
+      <p class="subtitle">
+        This page explains what happens in our modular approach and what happens in Nova Sonic realtime mode.
+      </p>
+
+      <section class="panel">
+        <h2>Modular Approach Flow (LLM + Polly + Services)</h2>
+        <ol class="flow-list">
+          <li>
+            <strong>User speaks in browser</strong>
+            Browser captures microphone audio chunks and streams to backend.
+          </li>
+          <li>
+            <strong>Speech to text stage</strong>
+            Audio is transcribed into text for reasoning.
+          </li>
+          <li>
+            <strong>LLM reasoning stage</strong>
+            LLM generates response text based on prompt + context.
+          </li>
+          <li>
+            <strong>Data and memory stage</strong>
+            Context/cache can be read from DynamoDB, S3, vector retrieval, and cache layers.
+          </li>
+          <li>
+            <strong>TTS stage (Polly)</strong>
+            Response text is converted into audio.
+          </li>
+          <li>
+            <strong>Audio playback to user</strong>
+            Generated speech audio streams back to browser speaker.
+          </li>
+        </ol>
+        <p class="flow-note">
+          Interrupt behavior: backend should stop current TTS stream and start new reasoning cycle on barge-in.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Nova Sonic Realtime Flow</h2>
+        <ol class="flow-list">
+          <li>
+            <strong>Session starts</strong>
+            Browser opens WebSocket to Node backend and backend opens Bedrock bidirectional stream.
+          </li>
+          <li>
+            <strong>User audio streaming</strong>
+            Browser sends PCM audio chunks continuously.
+          </li>
+          <li>
+            <strong>Realtime model processing</strong>
+            Nova Sonic handles speech understanding + reasoning + speech generation in one stream.
+          </li>
+          <li>
+            <strong>Assistant output streaming</strong>
+            Text and audio output chunks are returned in realtime and played immediately.
+          </li>
+          <li>
+            <strong>Barge-in handling</strong>
+            If user starts speaking while assistant is talking, client sends interrupt and server starts a new stream epoch.
+          </li>
+          <li>
+            <strong>Stale output protection</strong>
+            Client ignores old stream chunks using stream epoch IDs, improving interrupt accuracy.
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel">
+        <h2>When You Speak vs When Nova Speaks</h2>
+        <div class="flow-grid">
+          <article class="flow-card">
+            <h3>When You Speak</h3>
+            <ul>
+              <li>Mic audio is chunked and sent to backend.</li>
+              <li>Avatar switches to Listening mode.</li>
+              <li>If assistant is speaking, interrupt is triggered.</li>
+              <li>New stream session starts for your latest utterance.</li>
+            </ul>
+          </article>
+          <article class="flow-card">
+            <h3>When Nova Sonic Speaks</h3>
+            <ul>
+              <li>Backend receives realtime audio output chunks.</li>
+              <li>Browser queues audio buffers for smooth playback.</li>
+              <li>Avatar switches to Speaking mode.</li>
+              <li>Performance metrics capture first-response latency.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
